@@ -20,7 +20,7 @@ function App() {
                 )}
                 {Counter()}
                 <div>
-                    {CustomCounter()}
+                    <CustomCounter/>
                 </div>
             </header>
         </div>

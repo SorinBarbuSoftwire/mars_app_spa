@@ -1,25 +1,36 @@
-import React, {useState} from "react";
+import React, {Dispatch, SetStateAction, useContext, useState} from "react";
+
+interface ClickManager {
+    noClicks: number;
+    setNoClicks: Dispatch<SetStateAction<number>>;
+}
+
+const CounterContext = React.createContext<ClickManager>({
+    noClicks : 0,
+    setNoClicks: (): void => {}
+});
 
 function CustomCounter() {
     return (
         <>
-            {Comp1()}
+            <Comp1/>
         </>
     );
 }
 
-function Comp4(noClicks: number, setNoClicks: React.Dispatch<React.SetStateAction<number>>) {
+function Comp4() {
+    const value: ClickManager = useContext(CounterContext);
     return (
         <div>
-            Clicks: {noClicks}
+            Clicks: {value.noClicks}
         </div>
     );
 }
 
-function Comp3(noClicks: number, setNoClicks: React.Dispatch<React.SetStateAction<number>>) {
+function Comp3() {
     return (
         <>
-            {Comp4(noClicks, setNoClicks)}
+            <Comp4/>
             <p>
                 Click the button!
             </p>
@@ -27,9 +38,10 @@ function Comp3(noClicks: number, setNoClicks: React.Dispatch<React.SetStateActio
     );
 }
 
-function Comp2(noClicks: number, setNoClicks: React.Dispatch<React.SetStateAction<number>>) {
-    function handleClick() {
-        setNoClicks(noClicks + 1);
+function Comp2() {
+    const value: ClickManager = useContext(CounterContext);
+    function handleClick(): void {
+        value.setNoClicks(value.noClicks + 1);
     }
 
     return (
@@ -40,13 +52,16 @@ function Comp2(noClicks: number, setNoClicks: React.Dispatch<React.SetStateActio
 }
 
 function Comp1() {
-    const [noClicks, setNoClicks] = useState(0);
+    const [noClicks, setNoClicks2] = useState<number>(0);
 
     return (
-        <>
-            {Comp2(noClicks, setNoClicks)}
-            {Comp3(noClicks, setNoClicks)}
-        </>
+    <CounterContext.Provider value={{
+        noClicks: noClicks,
+        setNoClicks: setNoClicks2
+    }}>
+        <Comp2/>
+        <Comp3/>
+    </CounterContext.Provider>
     );
 }
 export default CustomCounter;
