@@ -52,12 +52,12 @@ function Comp2() {
 }
 
 function Comp1() {
-    const [noClicks, setNoClicks2] = useState<number>(0);
+    const [noClicks, setNoClicks] = useState<number>(0);
 
     return (
     <CounterContext.Provider value={{
         noClicks: noClicks,
-        setNoClicks: setNoClicks2
+        setNoClicks: setNoClicks
     }}>
         <Comp2/>
         <Comp3/>
