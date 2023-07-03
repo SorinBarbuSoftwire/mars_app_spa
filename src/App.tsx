@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import logo from './logo.svg';
 import './App.css';
 import NASA_info from "./NASA_info";
+import CustomCounter from "./CustomCounter";
 
 const noClicksKey = "MARS_App_noClicks";
 
@@ -18,6 +19,9 @@ function App() {
                     "The agency has a diverse workforce of just under 18,000 civil servants, and works with many more U.S."
                 )}
                 {Counter()}
+                <div>
+                    {CustomCounter()}
+                </div>
             </header>
         </div>
     );
@@ -28,7 +32,7 @@ function Counter() {
 
     useEffect(() => {
         let clicksStr: string | null = localStorage.getItem(noClicksKey);
-        if  (clicksStr != null) {
+        if  (clicksStr !== null) {
             let clicksNum: number | undefined = parseInt(clicksStr);
             if (clicksNum !== undefined) {
                 setNoClicks(clicksNum);
