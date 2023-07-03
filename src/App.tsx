@@ -1,8 +1,10 @@
 import React from 'react';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import logo from './logo.svg';
 import './App.css';
 import NASA_info from "./NASA_info";
+
+const noClicksKey = "MARS_App_noClicks";
 
 function App() {
     return (
@@ -24,8 +26,19 @@ function App() {
 function Counter() {
     const [noClicks, setNoClicks] = useState(0);
 
+    useEffect(() => {
+        let clicksStr: string | null = localStorage.getItem(noClicksKey);
+        if  (clicksStr != null) {
+            let clicksNum: number | undefined = parseInt(clicksStr);
+            if (clicksNum !== undefined) {
+                setNoClicks(clicksNum);
+            }
+        }
+    }, []);
+
     function handleClick() {
-        setNoClicks(noClicks + 1)
+        localStorage.setItem(noClicksKey, (noClicks + 1).toString());
+        setNoClicks(noClicks + 1);
     }
 
     return (
