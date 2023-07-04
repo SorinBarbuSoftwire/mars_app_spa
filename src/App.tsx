@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import './InfoTemplate.css'
-import Counter from "./Counter";
 import Exercises from "./Exercises";
+import Root from "./Root"
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Exercises />} />
-                <Route path="counter" element={<Counter />} />
+                <Route path="/" element={<Root />} />
+                {/* Exercises from yesterday */}
+                <Route path="exercises" element={<Exercises />} />
             </Routes>
 
         </BrowserRouter>
