@@ -1,0 +1,33 @@
+button {
+    width: 100px;
+    height: 30px;
+    border-radius: 12px;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.formSelect {
+    width: 200px;
+    text-align: center;
+}
+
+#mainDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#formDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px;
+    gap: 10px;
+}
+
+#imgDiv {
+    padding: 20px;
+    border: solid;
+    border-color: white;
+    border-radius: 40px;
+}

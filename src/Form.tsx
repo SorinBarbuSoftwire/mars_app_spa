@@ -2,6 +2,7 @@ import React, {useMemo, useRef, useState} from "react";
 import Select, {SingleValue} from "react-select";
 import {AxiosError, AxiosResponse} from "axios";
 import axios from 'axios';
+import './style/Form.css'
 
 enum Rovers {
     Curiosity = 'curiosity',
@@ -69,6 +70,7 @@ function Form() {
             }
         }
     }, [selectedRover]);
+    const [img1, setImg1] = useState<string>('');
     // Handle Change Functions
     function handleChangeRover(selectedRover: SingleValue<SelectOptions>): void {
         if (selectedRover === null || selectedRover.value === null) {
@@ -89,30 +91,45 @@ function Form() {
     }
 
     function handleSubmit(): void {
+        setImg1('');
         console.log("http://localhost:8000/rovers/" + selectedRover + "/photos/" + selectedCam);
         axios.get("http://localhost:8000/rovers/" + selectedRover + "/photos/" + selectedCam)
-            .then((response: AxiosResponse) => {console.log(response.data);})
-            .catch((error:AxiosError) => {console.log(error.response);});
+            .then((response: AxiosResponse) => {
+                // TODO Only one photo is displayed
+                if (response.data.photos.length > 0) {
+                    setImg1(response.data.photos[0].img_src)
+                }
+            })
+            .catch((error:AxiosError) => {
+                console.log(error.response);
+            });
     }
 
     return (
-        <div>
-            <p>------------------</p>
-            <div>Debug:</div>
-            <div>Rover: {selectedRover}</div>
-            <div>Cam: {selectedCam}</div>
-            <p>------------------</p>
-
-            <Select options={roverOptions}
-                    onChange={(selected: SingleValue<SelectOptions>) => handleChangeRover(selected)}
-            />
-            <Select options={camOptions}
-                    onChange={(selected: SingleValue<SelectOptions>) => handleChangeCam(selected)}
-                    value={selectedCam ? camOptions.find((camOption) => camOption.value === selectedCam) : null}
-            />
-            <button onClick={handleSubmit}>
-                Submit
-            </button>
+        <div id="mainDiv">
+            {/*DEBUG*/}
+            {/*<p>------------------</p>*/}
+            {/*<div>Debug:</div>*/}
+            {/*<div>Rover: {selectedRover}</div>*/}
+            {/*<div>Cam: {selectedCam}</div>*/}
+            {/*<p>------------------</p>*/}
+            <div id="formDiv">
+                <Select options={roverOptions}
+                        onChange={(selected: SingleValue<SelectOptions>) => handleChangeRover(selected)}
+                        className="formSelect"
+                />
+                <Select options={camOptions}
+                        onChange={(selected: SingleValue<SelectOptions>) => handleChangeCam(selected)}
+                        value={selectedCam ? camOptions.find((camOption) => camOption.value === selectedCam) : null}
+                        className="formSelect"
+                />
+                <button onClick={handleSubmit} disabled={selectedCam === null}>
+                    Submit
+                </button>
+            </div>
+            <div id="imgDiv">
+                {img1 !== '' && <img src={img1} alt="img1"/>}
+            </div>
 
         </div>
     );
