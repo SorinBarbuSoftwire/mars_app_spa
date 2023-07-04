@@ -7,6 +7,8 @@
     border-color: white;
     border-radius: 40px;
     padding: 10px;
+    color: white;
+    width: 900px;
 }
 
 #infoTemplate-HeaderDiv {

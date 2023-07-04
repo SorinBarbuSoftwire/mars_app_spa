@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './style/App.css';
 import Exercises from "./Exercises";
 import Root from "./Root"
 import {BrowserRouter, Routes, Route} from "react-router-dom";

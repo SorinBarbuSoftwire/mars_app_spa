@@ -1,5 +1,5 @@
 import React from "react";
-import './InfoTemplate.css';
+import './style/InfoTemplate.css';
 
 interface InfoInput {
     title: string,
