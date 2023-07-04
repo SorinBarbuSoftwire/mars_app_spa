@@ -1,0 +1,20 @@
+#infoTemplate-MainDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: medium;
+    border: solid;
+    border-color: white;
+    border-radius: 40px;
+    padding: 10px;
+}
+
+#infoTemplate-HeaderDiv {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+#infoTemplate-Icon {
+    width: 80px;
+}

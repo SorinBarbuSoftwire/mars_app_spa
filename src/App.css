@@ -36,24 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-#NASA-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: medium;
-  border: solid;
-  border-color: white;
-  border-radius: 40px;
-  padding: 10px;
-}
-
-#NASA-header {
-  display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-}
-
-#NASA-icon {
-  width: 80px;
-}
