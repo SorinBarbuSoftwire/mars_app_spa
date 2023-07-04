@@ -70,7 +70,13 @@ function Form() {
             }
         }
     }, [selectedRover]);
+    // TODO change imgs to array
     const [img1, setImg1] = useState<string>('');
+    const [img2, setImg2] = useState<string>('');
+    const [img3, setImg3] = useState<string>('');
+    const [img4, setImg4] = useState<string>('');
+    const [img5, setImg5] = useState<string>('');
+
     // Handle Change Functions
     function handleChangeRover(selectedRover: SingleValue<SelectOptions>): void {
         if (selectedRover === null || selectedRover.value === null) {
@@ -91,13 +97,30 @@ function Form() {
     }
 
     function handleSubmit(): void {
+        // TODO change imgs to array
         setImg1('');
-        console.log("http://localhost:8000/rovers/" + selectedRover + "/photos/" + selectedCam);
+        setImg2('');
+        setImg3('');
+        setImg4('');
+        setImg5('');
+
         axios.get("http://localhost:8000/rovers/" + selectedRover + "/photos/" + selectedCam)
             .then((response: AxiosResponse) => {
-                // TODO Only one photo is displayed
+                // TODO change imgs to array
                 if (response.data.photos.length > 0) {
                     setImg1(response.data.photos[0].img_src)
+                }
+                if (response.data.photos.length > 1) {
+                    setImg2(response.data.photos[1].img_src)
+                }
+                if (response.data.photos.length > 2) {
+                    setImg3(response.data.photos[2].img_src)
+                }
+                if (response.data.photos.length > 3) {
+                    setImg4(response.data.photos[3].img_src)
+                }
+                if (response.data.photos.length > 4) {
+                    setImg5(response.data.photos[4].img_src)
                 }
             })
             .catch((error:AxiosError) => {
@@ -128,7 +151,11 @@ function Form() {
                 </button>
             </div>
             <div id="imgDiv">
-                {img1 !== '' && <img src={img1} alt="img1"/>}
+                {img1 !== '' && <img className="img" src={img1} alt="img1"/>}
+                {img2 !== '' && <img className="img" src={img2} alt="img2"/>}
+                {img3 !== '' && <img className="img" src={img3} alt="img3"/>}
+                {img4 !== '' && <img className="img" src={img4} alt="img4"/>}
+                {img5 !== '' && <img className="img" src={img5} alt="img5"/>}
             </div>
 
         </div>
