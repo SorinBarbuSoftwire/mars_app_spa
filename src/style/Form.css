@@ -37,6 +37,37 @@ button {
 
 .img {
     object-fit: cover;
-    width: 400px;
-    height: 400px;
+    width: 800px;
+    height: 800px;
+}
+
+.optionDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 340px;
+}
+
+.optionLabel {
+    color: white;
+    font-size: 20px;
+}
+
+#solRange {
+    width: 200px;
+    background-color: red;
+    cursor: pointer;
+}
+
+#solValueDiv {
+    display: inline-block;
+    background-color: gray;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    margin-left: 14px;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.2);
 }

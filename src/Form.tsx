@@ -1,4 +1,4 @@
-import React, {useMemo, useRef, useState} from "react";
+import React, {useMemo, useState} from "react";
 import Select, {SingleValue} from "react-select";
 import {AxiosError, AxiosResponse} from "axios";
 import axios from 'axios';
@@ -70,7 +70,8 @@ function Form() {
             }
         }
     }, [selectedRover]);
-    // TODO change imgs to array
+    const [selectedSol, setSelectedSol] = useState(1);
+
     const [img1, setImg1] = useState<string>('');
     const [img2, setImg2] = useState<string>('');
     const [img3, setImg3] = useState<string>('');
@@ -96,17 +97,22 @@ function Form() {
         }
     }
 
+    function handleSlider(e: React.ChangeEvent<HTMLInputElement>): void {
+        setSelectedSol(parseInt(e.target.value));
+    }
     function handleSubmit(): void {
-        // TODO change imgs to array
         setImg1('');
         setImg2('');
         setImg3('');
         setImg4('');
         setImg5('');
 
-        axios.get("http://localhost:8000/rovers/" + selectedRover + "/photos/" + selectedCam)
+        axios.get("http://localhost:8000/rovers/" + selectedRover + "/photos/" + selectedCam, {
+            params: {
+                sol: selectedSol
+            }
+        })
             .then((response: AxiosResponse) => {
-                // TODO change imgs to array
                 if (response.data.photos.length > 0) {
                     setImg1(response.data.photos[0].img_src)
                 }
@@ -127,25 +133,28 @@ function Form() {
                 console.log(error.response);
             });
     }
-
     return (
         <div id="mainDiv">
-            {/*DEBUG*/}
-            {/*<p>------------------</p>*/}
-            {/*<div>Debug:</div>*/}
-            {/*<div>Rover: {selectedRover}</div>*/}
-            {/*<div>Cam: {selectedCam}</div>*/}
-            {/*<p>------------------</p>*/}
             <div id="formDiv">
-                <Select options={roverOptions}
-                        onChange={(selected: SingleValue<SelectOptions>) => handleChangeRover(selected)}
-                        className="formSelect"
-                />
-                <Select options={camOptions}
-                        onChange={(selected: SingleValue<SelectOptions>) => handleChangeCam(selected)}
-                        value={selectedCam ? camOptions.find((camOption) => camOption.value === selectedCam) : null}
-                        className="formSelect"
-                />
+                <div className="optionDiv">
+                    <label className="optionLabel">Rover:</label>
+                    <Select options={roverOptions}
+                            onChange={(selected: SingleValue<SelectOptions>) => handleChangeRover(selected)}
+                            className="formSelect"
+                    />
+                </div>
+                <div className="optionDiv">
+                    <label className="optionLabel">Cam:</label>
+                    <Select options={camOptions}
+                            onChange={(selected: SingleValue<SelectOptions>) => handleChangeCam(selected)}
+                            value={selectedCam ? camOptions.find((camOption) => camOption.value === selectedCam) : null}
+                            className="formSelect"
+                    />
+                </div>
+                <div className="optionDiv">
+                    <label className="optionLabel">Sol:<div id="solValueDiv">{selectedSol}</div></label>
+                    <input type="range" min={1} max={1000} value={selectedSol} id="solRange" onChange={handleSlider}/>
+                </div>
                 <button onClick={handleSubmit} disabled={selectedCam === null}>
                     Submit
                 </button>
