@@ -74,11 +74,7 @@ function Form() {
     }, [selectedRover]);
     const [selectedSol, setSelectedSol] = useState(1);
 
-    const [img1, setImg1] = useState<string>('');
-    const [img2, setImg2] = useState<string>('');
-    const [img3, setImg3] = useState<string>('');
-    const [img4, setImg4] = useState<string>('');
-    const [img5, setImg5] = useState<string>('');
+    const [imgs, setImgs] = useState<ImgDict>({});
 
     // Handle Change Functions
     function handleChangeRover(selectedRover: SingleValue<SelectOptions>): void {
@@ -103,11 +99,7 @@ function Form() {
         setSelectedSol(parseInt(e.target.value));
     }
     function handleSubmit(): void {
-        setImg1('');
-        setImg2('');
-        setImg3('');
-        setImg4('');
-        setImg5('');
+        setImgs({});
 
         axios.get("http://localhost:8000/rovers/" + selectedRover + "/photos/" + selectedCam, {
             params: {
@@ -115,21 +107,16 @@ function Form() {
             }
         })
             .then((response: AxiosResponse) => {
-                if (response.data.photos.length > 0) {
-                    setImg1(response.data.photos[0].img_src)
+                const dictAux: ImgDict = {};
+                let photosLen = response.data.photos.length;
+
+                if (photosLen > 5) {
+                    photosLen = 5;
                 }
-                if (response.data.photos.length > 1) {
-                    setImg2(response.data.photos[1].img_src)
+                for (let i = 0; i < photosLen; i++) {
+                    dictAux["img" + i] = response.data.photos[i].img_src;
                 }
-                if (response.data.photos.length > 2) {
-                    setImg3(response.data.photos[2].img_src)
-                }
-                if (response.data.photos.length > 3) {
-                    setImg4(response.data.photos[3].img_src)
-                }
-                if (response.data.photos.length > 4) {
-                    setImg5(response.data.photos[4].img_src)
-                }
+                setImgs(dictAux);
             })
             .catch((error:AxiosError) => {
                 console.log(error.response);
@@ -162,11 +149,11 @@ function Form() {
                 </button>
             </div>
             <div id="imgDiv">
-                {img1 !== '' && <img className="img" src={img1} alt="img1"/>}
-                {img2 !== '' && <img className="img" src={img2} alt="img2"/>}
-                {img3 !== '' && <img className="img" src={img3} alt="img3"/>}
-                {img4 !== '' && <img className="img" src={img4} alt="img4"/>}
-                {img5 !== '' && <img className="img" src={img5} alt="img5"/>}
+                {imgs['img0'] && <img className="img" src={imgs['img0']} alt="img0"/>}
+                {imgs['img1'] && <img className="img" src={imgs['img1']} alt="img1"/>}
+                {imgs['img2'] && <img className="img" src={imgs['img2']} alt="img2"/>}
+                {imgs['img3'] && <img className="img" src={imgs['img3']} alt="img3"/>}
+                {imgs['img4'] && <img className="img" src={imgs['img4']} alt="img4"/>}
             </div>
 
         </div>
