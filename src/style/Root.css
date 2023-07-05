@@ -1,8 +1,39 @@
 body {
+    background-color: #282c34;
+}
+#rootMainDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #282c34;
     padding-top: 30px;
     row-gap: 40px;
+    margin-top: 20px;
+}
+
+#rootButtonsDiv {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.routeButtons {
+    padding: 8px;
+    background-color: #282c34;
+    border-radius: 12px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: white;
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+}
+
+.routeButtons:hover {
+    background-color: gray;
+}
+
+.routeButtons:active {
+    background-color: lightgrey;
 }

@@ -4,6 +4,8 @@ import {AxiosError, AxiosResponse} from "axios";
 import axios from 'axios';
 import './style/Form.css'
 
+type ImgDict = Record<string, string>;
+
 enum Rovers {
     Curiosity = 'curiosity',
     Opportunity = 'opportunity',
@@ -155,7 +157,7 @@ function Form() {
                     <label className="optionLabel">Sol:<div id="solValueDiv">{selectedSol}</div></label>
                     <input type="range" min={1} max={1000} value={selectedSol} id="solRange" onChange={handleSlider}/>
                 </div>
-                <button onClick={handleSubmit} disabled={selectedCam === null}>
+                <button id="formSubmitButton" onClick={handleSubmit} disabled={selectedCam === null}>
                     Submit
                 </button>
             </div>
