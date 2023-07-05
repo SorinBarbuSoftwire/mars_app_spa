@@ -1,0 +1,66 @@
+#aboutMainDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 36px 60px 60px 60px;
+}
+
+#headerImg {
+    width: 100%;
+}
+
+#aboutContentDiv {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#aboutLeftDiv {
+    background-color: lightgrey;
+    width: 40%;
+    padding: 20px;
+    margin-right: 20px;
+}
+
+#aboutRightDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#aboutRightTopDiv {
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#aboutRightBottomDiv {
+    background-color: blue;
+    height: 50%;
+    width: 100%;
+}
+
+.aboutRightImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+#aboutRightTopLeftDiv {
+    background-color: green;
+    width: 50%;
+    height: 100%;
+    margin-right: 20px;
+}
+
+#aboutRightTopRightDiv {
+    background-color: lightgrey;
+    width: 50%;
+    height: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+}
